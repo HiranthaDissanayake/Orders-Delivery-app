@@ -8,6 +8,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final PageController _pageController = PageController();
 
   int isOrders = 0;
 
@@ -85,9 +86,25 @@ class _HomeState extends State<Home> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 40, left: 40, right: 40),
+                      padding: const EdgeInsets.only(
+                        top: 40,
+                        left: 40,
+                        right: 40,
+                      ),
                       child: Container(
                         decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 2,
+                              blurStyle: BlurStyle.normal,
+                              offset: Offset(
+                                0,
+                                1,
+                              ), // changes position of shadow
+                            ),
+                          ],
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(50),
                         ),
@@ -96,44 +113,104 @@ class _HomeState extends State<Home> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Container(
-                                height: 50,
-                                width: 150,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 2,
-                                      blurStyle: BlurStyle.normal,
-                                      offset: Offset(0, 1), // changes position of shadow
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isOrders = 0;
+                                  });
+                                  _pageController.animateToPage(
+                                    0,
+                                    duration: Duration(milliseconds: 300),
+                                    curve: Curves.easeInOut,
+                                  );
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 2,
+                                        blurStyle: BlurStyle.normal,
+                                        offset: Offset(
+                                          0,
+                                          1,
+                                        ), // changes position of shadow
                                       ),
-                                  ],
-                                  color: Colors.deepOrange,
-                                  borderRadius: BorderRadius.circular(50),
+                                    ],
+                                    color:
+                                        isOrders == 0
+                                            ? Colors.deepOrange
+                                            : Colors.white,
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Orders",
+                                      style: TextStyle(
+                                        color:
+                                            isOrders == 0
+                                                ? Colors.white
+                                                : Colors.deepOrange,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                                child: Center(child: Text("Orders", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),)),
                               ),
-                          
-                          
-                          
-                              Container(
-                                height: 50,
-                                width: 150,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 2,
-                                      blurStyle: BlurStyle.normal,
-                                      offset: Offset(0, 1), // changes position of shadow
+
+                              SizedBox(width: 5),
+
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isOrders = 1;
+                                  });
+                                  _pageController.animateToPage(
+                                    1,
+                                    duration: Duration(milliseconds: 300),
+                                    curve: Curves.easeInOut,
+                                  );
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 2,
+                                        blurStyle: BlurStyle.normal,
+                                        offset: Offset(
+                                          0,
+                                          1,
+                                        ), // changes position of shadow
                                       ),
-                                  ],
-                                  color: Colors.deepOrange,
-                                  borderRadius: BorderRadius.circular(50),
+                                    ],
+                                    color:
+                                        isOrders == 1
+                                            ? Colors.deepOrange
+                                            : Colors.white,
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Delevered",
+                                      style: TextStyle(
+                                        color:
+                                            isOrders == 1
+                                                ? Colors.white
+                                                : Colors.deepOrange,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                                child: Center(child: Text("Delevered", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),)),
                               ),
                             ],
                           ),
@@ -143,6 +220,7 @@ class _HomeState extends State<Home> {
 
                     Expanded(
                       child: PageView.builder(
+                        controller: _pageController,
                         itemCount: 2,
                         itemBuilder: (context, index) {
                           return Container(
