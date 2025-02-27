@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:red_dress_delevery/Pages/home.dart';
@@ -9,7 +11,11 @@ class Api {
     var url = Uri.parse("${baseUrl}login");
 
     try {
-      final res = await http.post(url, body: data);
+      final res = await http.post(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(data)
+      );
 
       if (res.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(

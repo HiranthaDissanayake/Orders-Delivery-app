@@ -54,6 +54,7 @@ class _LoginState extends State<Login> {
                       Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: TextFormField(
+                          controller: _emailController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter your email';
@@ -78,6 +79,7 @@ class _LoginState extends State<Login> {
                       Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: TextFormField(
+                          controller: _passwordController,
                           validator: (value) {
                             if(value == null || value.isEmpty){
                               return 'Please enter your password';
