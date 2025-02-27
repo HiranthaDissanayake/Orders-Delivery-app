@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           bodyMedium: GoogleFonts.poppins(textStyle: textTheme.bodyMedium),
         ),
       ),
-      home: Home(),
+      home: SplashScreen(),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:red_dress_delevery/Pages/home.dart';
+import 'package:red_dress_delevery/services/Api.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -9,6 +10,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
 
   final _formkey = GlobalKey<FormState>();
@@ -63,7 +67,7 @@ class _LoginState extends State<Login> {
                           },
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(30),
                             ),
                             labelText: "Email",
                             prefixIcon: Icon(Icons.email, color: Colors.deepOrange,),
@@ -83,7 +87,7 @@ class _LoginState extends State<Login> {
                           },
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(30),
                             ),
                             labelText: "Password",
                             prefixIcon: Icon(Icons.lock, color: Colors.deepOrange,),
@@ -96,7 +100,13 @@ class _LoginState extends State<Login> {
                         child: GestureDetector(
                           onTap: (){
                             if (_formkey.currentState!.validate()){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
+
+                              var data = {
+                                "email": _emailController.text,
+                                "password": _passwordController.text
+                              };
+
+                              Api().login(data, context);
                             }
                           },
                           child: Container(

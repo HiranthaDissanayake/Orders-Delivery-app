@@ -221,6 +221,11 @@ class _HomeState extends State<Home> {
                     Expanded(
                       child: PageView.builder(
                         controller: _pageController,
+                        onPageChanged: (index) {
+                          setState(() {
+                            isOrders = index;
+                          });
+                        },
                         itemCount: 2,
                         itemBuilder: (context, index) {
                           return Container(
