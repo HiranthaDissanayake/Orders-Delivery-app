@@ -66,4 +66,19 @@ app.post("/api/login", (req, res)=>{
 });
 
 
+// Api for get orders from database
+
+app.get("/api/orders", (req, res)=>{
+    const sql = "SELECT * FROM orders";
+    db.query(sql, (err, results)=>{
+        if(err){
+        return res.status(500).json({
+            message: "Database error",
+        });
+        }
+        return res.status(200).json(results);
+                
+    })
+});
+
 
