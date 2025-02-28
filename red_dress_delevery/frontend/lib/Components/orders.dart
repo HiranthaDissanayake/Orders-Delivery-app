@@ -13,7 +13,7 @@ class _OrdersState extends State<Orders> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
+      height: 230,
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -29,7 +29,22 @@ class _OrdersState extends State<Orders> {
             Text("Order Placed Date : 2024.02.27"),
             Text("Customer Address : "),
             Text("No.121 , Matale , Sri Lanka"),
+            Text("Customer Name : Kasun Bandara"),
             Text("Customer Contact : 0771234567"),
+            SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                ),
+                onPressed: (){
+                  
+                },
+                child: Text("Delivered", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)
+              ),
+            )
           ],
         ),
       ),
