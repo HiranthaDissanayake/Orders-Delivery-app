@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:red_dress_delevery/Pages/home.dart';
 import 'package:red_dress_delevery/services/Api.dart';
 
 class Login extends StatefulWidget {
@@ -31,6 +30,7 @@ class _LoginState extends State<Login> {
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
+                  // ignore: deprecated_member_use
                   color: Colors.black.withOpacity(0.5),
                   spreadRadius: 5,
                   blurRadius: 5,
@@ -117,6 +117,7 @@ class _LoginState extends State<Login> {
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
+                                // ignore: deprecated_member_use
                                 color: Colors.black.withOpacity(0.5),
                                 spreadRadius: 2,
                                 offset: Offset(0, 2),

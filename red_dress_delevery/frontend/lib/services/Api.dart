@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -53,6 +55,36 @@ class Api {
     } catch (e) {
       print(e);
     }
+  }
+
+
+  // Add data to delivered table
+  Future addDelivered(Map<String, dynamic> data, BuildContext context) async {
+    var url = Uri.parse("${baseUrl}delivered");
+  
+    final res = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode(data)
+    );
+
+    if (res.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Order marked as Delivered"),
+          duration: Duration(seconds: 2),
+        ),
+
+      );
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Failed to mark as delivered, Try Again"),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
+  
   }
 
 

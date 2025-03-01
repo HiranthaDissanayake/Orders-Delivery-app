@@ -170,7 +170,7 @@ class _OrdersState extends State<Orders> {
                                       };
 
                                       // Pass the data to the delivered screen
-
+                                      Api().addDelivered(data, context);                                            
                                       
                                       //Delete the order from the database
                                       deleteOrder(order['id']);
