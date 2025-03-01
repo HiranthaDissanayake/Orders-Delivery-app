@@ -11,6 +11,8 @@ app.listen(5000, () => {
     console.log("Server is running on port 5000");
 })
 
+
+// Database connection
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -80,5 +82,57 @@ app.get("/api/orders", (req, res)=>{
                 
     })
 });
+
+
+// Api for delete order from database
+
+app.delete("/api/orders/:id", (req, res)=>{
+    const id = req.params.id;
+    const sql = "DELETE FROM orders WHERE id = ?";
+    db.query(sql, [id], (err, results)=>{
+        if(err){
+            return res.status(500).json({
+                message: "Database error",
+            });
+        }
+        return res.status(200).json({
+            message: "Order deleted successfully",
+        });
+    });
+});
+
+// Api for add delivered order to delivered table
+
+app.post("/api/delivered", (req, res)=>{
+    const {id, customerName, phone, address } = req.body;
+    const sql = "INSERT INTO deliveredorders (id, customerName, phone, address) VALUES (?, ?, ?, ?)";
+    db.query(sql, [id, customerName, phone, address], (err, results)=>{
+        if(err){
+            return res.status(500).json({
+                message: "Database error",
+            });
+        }
+        return res.status(200).json({
+            message: "Order added to delivered table",
+        });
+    });
+});
+
+
+// Api for get delivered orders from database
+app.get("/api/deliveredOrders", (req, res)=>{
+    const sql = "SELECT * FROM deliveredorders";
+    db.query(sql, (err, results)=>{
+        if(err){
+        return res.status(500).json({
+            message: "Database error",
+        });
+        }
+        return res.status(200).json(results);
+                
+    })
+});
+
+
 
 
