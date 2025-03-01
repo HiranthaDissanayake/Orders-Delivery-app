@@ -88,10 +88,19 @@ class Api {
   }
 
 
+  // Api for getting all delivered orders
+  Future <List<dynamic>> fetchAllDeliveredOrders() async {
 
+    var url = Uri.parse("${baseUrl}deliveredOrders");
 
+    final res = await http.get(url);
 
-
+    if(res.statusCode==200){
+      return jsonDecode(res.body);
+    }else{
+      throw Exception('Failed to get orders');
+    }
+  }
 
 
 }
