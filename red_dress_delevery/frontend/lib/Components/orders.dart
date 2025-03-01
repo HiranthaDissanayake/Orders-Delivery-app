@@ -25,9 +25,8 @@ class _OrdersState extends State<Orders> {
     final res = await http.get(url);
 
     if(res.statusCode==200){
-      setState(() {
-        orders = jsonDecode(res.body);
-      });
+
+      orders = jsonDecode(res.body);
       return orders;
     }else{
       throw Exception('Failed to get orders');
@@ -57,6 +56,13 @@ class _OrdersState extends State<Orders> {
 
   }
 
+  @override
+  void initState() {
+    super.initState();
+    fetchAllOrders();
+  }
+
+  
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
