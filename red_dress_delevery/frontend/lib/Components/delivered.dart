@@ -34,7 +34,7 @@ class _DeliveredState extends State<Delivered> {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  height: 270,
+                  height: 200,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     boxShadow: [
@@ -77,6 +77,7 @@ class _DeliveredState extends State<Delivered> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
+                                  fontSize: 16
                                 ),
                               ),
                               Text(
@@ -84,6 +85,7 @@ class _DeliveredState extends State<Delivered> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
+                                  fontSize: 16
                                 ),
                               ),
                               Text(
@@ -99,6 +101,7 @@ class _DeliveredState extends State<Delivered> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
+                                  fontSize: 16
                                 ),
                               ),
                               Text(
