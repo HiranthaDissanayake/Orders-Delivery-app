@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:red_dress_delevery/services/Api.dart';
 
 class Orders extends StatefulWidget {
@@ -10,11 +13,54 @@ class Orders extends StatefulWidget {
 
 class _OrdersState extends State<Orders> {
   int isOrders = 0;
+   List<dynamic> orders = [];
+
+  static const baseUrl = "http://192.168.69.38:5000/api/";
+
+  // Api for fetch all orders
+  Future <List<dynamic>> fetchAllOrders() async {
+
+    var url = Uri.parse("${baseUrl}orders");
+
+    final res = await http.get(url);
+
+    if(res.statusCode==200){
+      setState(() {
+        orders = jsonDecode(res.body);
+      });
+      return orders;
+    }else{
+      throw Exception('Failed to get orders');
+    }
+  }
+
+  // Api for deliver order
+  Future<void> deleteOrder(int orderId) async {
+
+    var url = Uri.parse("${baseUrl}orders/$orderId");
+
+    final res = await http.delete(url);
+
+    if(res.statusCode==200){
+      setState(() {
+        orders.removeWhere((order) => order['id'] == orderId);
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Order delivered successfully')));
+
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to update order, Try Again'))
+      );
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Api().fetchAllOrders(),
+      future: fetchAllOrders(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
@@ -113,9 +159,23 @@ class _OrdersState extends State<Orders> {
 
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.green,
+                                      backgroundColor: const Color.fromARGB(255, 24, 161, 29),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      var data = {
+                                        'id': order['id'],
+                                        'customerName': order['customerName'],
+                                        'phone': order['phone'],
+                                        'address': order['address'],
+                                      };
+
+                                      // Pass the data to the delivered screen
+
+                                      
+                                      //Delete the order from the database
+                                      deleteOrder(order['id']);
+
+                                    },
                                     child: Row(
                                       children: [
                                         Icon(Icons.done_outlined,color: Colors.white,size: 20),
