@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:red_dress_delevery/Pages/home.dart';
 
 class Api {
-  static const baseUrl = "http://192.168.69.38:5000/api/";
+  static const baseUrl = "http://192.168.82.38:5000/api/";
 
 
   // Api for 

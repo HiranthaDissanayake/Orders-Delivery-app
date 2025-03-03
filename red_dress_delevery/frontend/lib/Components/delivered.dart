@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:red_dress_delevery/services/Api.dart';
 
 class Delivered extends StatefulWidget {
@@ -21,7 +22,7 @@ class _DeliveredState extends State<Delivered> {
         } else if (snapshot.hasError) {
           return Center(child: Text('Error : ${snapshot.error}'));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(child: Text('No Delivered Orders Found'));
+          return Center(child: Lottie.asset("assets/empty.json", width: 300, repeat: true));
         }
 
         return SizedBox(
@@ -54,6 +55,7 @@ class _DeliveredState extends State<Delivered> {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         height: 250,
+                        width: double.infinity,
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
